@@ -26,5 +26,11 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+//Personal information route
+$f3->route('GET /personal-info', function() {
+    $view = new View;
+    echo $view->render('views/personal-info.php');
+});
+
 //Run fat-free
 $f3->run();
