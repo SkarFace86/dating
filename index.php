@@ -22,13 +22,13 @@ $f3->set('DEBUG', 3);
 
 //Define a default route
 $f3->route('GET /', function() {
-    $view = new View;
+    $view = new View();
     echo $view->render('views/home.html');
 });
 
 //Personal information route
 $f3->route('GET /personal-info', function() {
-    $view = new View;
+    $view = new View();
     echo $view->render('views/personal-info.php');
 });
 
