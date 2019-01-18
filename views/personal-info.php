@@ -10,6 +10,7 @@ session_start();
 $fname = "";
 $lname = "";
 $age = "";
+$gender = "";
 $phone = "";
 ?>
 <!doctype html>
@@ -35,30 +36,35 @@ $phone = "";
                 <br>
                 <input type="text" name="fname" class="w-100"
                     <?php echo "value='$name'"; ?> >
-            </label>
+            </label> <!-- First Name -->
             <br>
             <label class="font-weight-bold w-100">Last Name
                 <br>
                 <input type="text" name="lname" class="w-100"
-                    <?php echo "value='$lname'" ?> >
-            </label>
+                    <?php echo "value='$lname'"; ?> >
+            </label> <!-- Last Name -->
             <br>
             <label class="font-weight-bold w-100">Age
                 <br>
                 <input type="text" name="age" class="w-100"
-                    <?php echo "value='$age'" ?> >
-            </label>
+                    <?php echo "value='$age'"; ?> >
+            </label> <!-- Age -->
             <br>
-            <label><span class="font-weight-bold">Gender</span>
+            <label name="gender"><span class="font-weight-bold">Gender</span>
                 <br>
                 <input type="radio" value="male" name="method"
                         class="font-weight-normal">&nbspMale
                 &nbsp&nbsp
                 <input type="radio" value="female" name="method">&nbspFemale
+            </label> <!-- Gender -->
+            <label class="font-weight-bold w-100">Phone
+                <br>
+                <input type="text" name="phone" class="w-100"
+                         placeholder="(XXX)-XXX-XXXX"
+                       <?php echo "value='$phone'"; ?> >
             </label>
-
-        </div>
-    </div>
+        </div> <!-- col-7 -->
+    </div> <!-- row col-12 -->
 </div> <!-- div class container -->
 
 
