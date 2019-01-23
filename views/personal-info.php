@@ -5,6 +5,7 @@
  * Date: 1/15/2019
  * Initiate fat free
  */
+session_start();
 $fname = "";
 $lname = "";
 $age = "";
@@ -16,6 +17,8 @@ if(!empty($_POST)) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $phone = $_POST['phone'];
+
+    include('model/personal-info-validation.php');
 }
 ?>
 <!doctype html>
@@ -56,12 +59,13 @@ if(!empty($_POST)) {
                         <?php echo "value='$age'"; ?> >
                 </label> <!-- Age -->
                 <br>
-                <label name="gender"><span class="font-weight-bold">Gender</span>
+                <label><span class="font-weight-bold">Gender</span>
                     <br>
-                    <input type="radio" value="male" name="method"
-                           class="font-weight-normal">&nbspMale
+                    <input type="radio" value="male" name="gender"
+                <?php //if($gender == "male") { echo "checked='checked'"; } ?> >&nbspMale
                     &nbsp&nbsp
-                    <input type="radio" value="female" name="method">&nbspFemale
+                    <input type="radio" value="female" name="gender"
+                <?php //if($gender == "female") { echo "checked='checked'"; } ?> >&nbspFemale
                 </label> <!-- Gender -->
                 <label class="font-weight-bold w-100">Phone
                     <br>
@@ -71,7 +75,7 @@ if(!empty($_POST)) {
                 </label>
         </div> <!-- col-7 -->
         <div class="col-5">
-            <p class="tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
+            <p class="border border-dark tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
                 entered is protected by our <a href="">privacy policy</a>.
                 Profile information can only be viewed by others with your
                 permission.</p>
@@ -86,8 +90,6 @@ if(!empty($_POST)) {
     </div> <!-- empty space -->
             </form> <!-- end form -->
 </div> <!-- div class container -->
-
-
 
 <?php include('include/scripts.html'); ?>
 </body>
