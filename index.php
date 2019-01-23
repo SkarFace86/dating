@@ -27,7 +27,7 @@ $f3->route('GET /', function() {
 });
 
 //Personal information route
-$f3->route('GET /personal-info', function() {
+$f3->route('POST /personal-info', function() {
     $view = new View();
     echo $view->render('views/personal-info.php');
 });

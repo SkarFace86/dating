@@ -5,13 +5,18 @@
  * Date: 1/15/2019
  * Initiate fat free
  */
-session_start();
-
 $fname = "";
 $lname = "";
 $age = "";
 $gender = "";
 $phone = "";
+if(!empty($_POST)) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $phone = $_POST['phone'];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,11 +37,11 @@ $phone = "";
         <hr class="alert-secondary">
     <div class="row">
         <div class="col-7">
-            <form>
+            <form action="" method="POST">
                 <label class="font-weight-bold w-100">First Name
                     <br>
                     <input type="text" name="fname" class="w-100"
-                        <?php echo "value='$name'"; ?> >
+                        <?php echo "value='$fname'"; ?> >
                 </label> <!-- First Name -->
                 <br>
                 <label class="font-weight-bold w-100">Last Name
@@ -65,15 +70,18 @@ $phone = "";
                         <?php echo "value='$phone'"; ?> >
                 </label>
         </div> <!-- col-7 -->
-        <div class="col-5 tos bg-secondary">
-
+        <div class="col-5">
+            <p class="tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
+                entered is protected by our <a href="">privacy policy</a>.
+                Profile information can only be viewed by others with your
+                permission.</p>
         </div>
     </div> <!-- row col-12 -->
     <div class="row">
         <div class="col-10"></div> <!-- empty space -->
         <div class="col-2 align-center">
-            <input type="submit" value="Next >" method="POST" action=""
-                   class="btn btn-primary mx-5">
+            <input type="submit" value="Next >"
+                   class="btn btn-primary">
         </div>
     </div> <!-- empty space -->
             </form> <!-- end form -->

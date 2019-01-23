@@ -4,5 +4,7 @@
 }
 
 .tos {
-    margin-bottom: 20%;
+    background-color: lightgray;
+    border-width: medium;
+    border-color: darkgray;
 }
