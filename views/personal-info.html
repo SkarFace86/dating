@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Personal Information</title>
+</head>
+<body>
+<div class="container col-lg-9 col-md-12 px-0">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Your Forever Finder</a>
+    </nav> <!-- nav bar -->
+</div> <!-- nav bar container -->
+<div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
+    <div class="row col-12">
+        <h1>Personal Information</h1>
+    </div>
+    <hr class="alert-secondary">
+    <form action="#" method="POST">
+    <div class="row">
+        <div class="col-7">
+            <label class="font-weight-bold w-100">First Name
+                <br>
+                <input type="text" name="fname" class="w-100" value="{{ @_POST.fname }}">
+                <check if="@validFname != true"><p class="alert-danger">Enter a valid first name</p></check>
+            </label> <!-- First Name -->
+            <br>
+            <label class="font-weight-bold w-100">Last Name
+                <br>
+                <input type="text" name="lname" class="w-100" value="{{ @_POST.lname }}">
+                <check if="@validLname != true"><p class="alert-danger">Enter a valid last name</p></check>
+            </label> <!-- Last Name -->
+            <br>
+            <label class="font-weight-bold w-100">Age
+                <br>
+                <input type="text" name="age" class="w-100" value="{{ @_POST.age }}">
+                <check if="@validAge != true"><p class="alert-danger">Enter a valid age. Must be over 18</p></check>
+            </label> <!-- Age -->
+            <br>
+            <label><span class="font-weight-bold">Gender</span>
+                <br>
+                <input type="radio" value="male" name="gender">&nbsp;Male
+                &nbsp;&nbsp;
+                <input type="radio" value="female" name="gender">&nbsp;Female
+            </label> <!-- Gender -->
+            <label class="font-weight-bold w-100">Phone
+                <br>
+                <input type="text" name="phone" class="w-100" value="{{ @_POST.phone }}"
+                       placeholder="(XXX)XXX-XXXX">
+                <check if="@validPhone != true"><p class="alert-danger">Enter a valid phone number</p></check>
+            </label>
+        </div> <!-- col-7 -->
+        <div class="col-5">
+            <p class="border border-dark tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
+                entered is protected by our <a href="">privacy policy</a>.
+                Profile information can only be viewed by others with your
+                permission.</p>
+        </div>
+    </div> <!-- row col-12 -->
+        <div class="row">
+            <div class="col-10"></div> <!-- empty space -->
+            <div class="col-2 align-center">
+                <input type="submit" value="Next >"
+                       class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+</div> <!-- div class container -->
+
+<script src="scripts/jquery.slim.min.js"></script>
+<script src="scripts/popper.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
+</body>
+</html>
