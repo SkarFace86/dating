@@ -20,6 +20,8 @@ $f3 = Base::instance();
 //Turn of fat free error reporting
 $f3->set('DEBUG', 3);
 
+require_once('model/data-validation.php');
+
 //Define a default route
 $f3->route('GET /', function() {
     $view = new View();
@@ -27,20 +29,30 @@ $f3->route('GET /', function() {
 });
 
 //Personal information route
-$f3->route('POST /personal-info', function($f3) {
-    if(!empty($_POST)) {
-        include('model/personal-info-validation.php');
-        if($validName) {
+$f3->route('GET|POST /personal-info', function($f3) {
+    $_SESSION = array();
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $phone = $_POST['phone'];
+    if(isset($_POST)) {
+        if(validFirstName($fname) && validLastName($lname) &&
+            validAge($age) && validPhone($phone)) {
+            $_SESSION['fname'] = $fname;
+            $_SESSION['lname'] = $lname;
+            $_SESSION['age'] = $age;
+            $_SESSION['gender'] = $gender;
+            $_SESSION['phone'] = $phone;
             $f3->reroute('profile');
         }
     }
-    print_r($_POST);
-
     $template = new Template();
     echo $template->render('views/personal-info.html');
 });
 
 $f3->route('GET /profile', function($f3) {
+    include('include/states.php');
     $template = new Template();
     echo $template->render('views/profile.html');
 });

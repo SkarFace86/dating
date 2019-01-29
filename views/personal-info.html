@@ -1,3 +1,11 @@
+<!--
+Brandon Skar
+IT 328
+01/10/2019
+personal-info.html
+Set up personal information
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,36 +31,33 @@
     <form action="#" method="POST">
     <div class="row">
         <div class="col-7">
-            <label class="font-weight-bold w-100">First Name
-                <br>
+            <label class="font-weight-bold w-100">First Name</label> <!-- First Name -->
                 <input type="text" name="fname" class="w-100" value="{{ @_POST.fname }}">
-                <check if="@validFname != true"><p class="alert-danger">Enter a valid first name</p></check>
-            </label> <!-- First Name -->
-            <br>
-            <label class="font-weight-bold w-100">Last Name
-                <br>
+            <check if="!@validFname &&
+                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid first name</p></check>
+            <label class="font-weight-bold w-100">Last Name</label> <!-- Last Name -->
                 <input type="text" name="lname" class="w-100" value="{{ @_POST.lname }}">
-                <check if="@validLname != true"><p class="alert-danger">Enter a valid last name</p></check>
-            </label> <!-- Last Name -->
-            <br>
-            <label class="font-weight-bold w-100">Age
-                <br>
+            <check if="!@validLname &&
+                            !empty(@_POST)"><p class=" alert-danger font-weight-bold">Enter a valid last name</p></check>
+            <label class="font-weight-bold w-100">Age</label> <!-- Age -->
                 <input type="text" name="age" class="w-100" value="{{ @_POST.age }}">
-                <check if="@validAge != true"><p class="alert-danger">Enter a valid age. Must be over 18</p></check>
-            </label> <!-- Age -->
-            <br>
+            <check if="!@validAge &&
+                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</p></check>
             <label><span class="font-weight-bold">Gender</span>
                 <br>
-                <input type="radio" value="male" name="gender">&nbsp;Male
+                <input type="radio" value="male" name="gender">&nbsp;
+                <span class="font-weight-bold">Male</span>
                 &nbsp;&nbsp;
-                <input type="radio" value="female" name="gender">&nbsp;Female
+            </label>
+            <label>
+                <input type="radio" value="female" name="gender">&nbsp;
+                <span class="font-weight-bold">Female</span>
             </label> <!-- Gender -->
-            <label class="font-weight-bold w-100">Phone
-                <br>
+            <label class="font-weight-bold w-100">Phone</label>
                 <input type="text" name="phone" class="w-100" value="{{ @_POST.phone }}"
                        placeholder="(XXX)XXX-XXXX">
-                <check if="@validPhone != true"><p class="alert-danger">Enter a valid phone number</p></check>
-            </label>
+            <check if="!@validPhone &&
+                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid phone number</p></check>
         </div> <!-- col-7 -->
         <div class="col-5">
             <p class="border border-dark tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
