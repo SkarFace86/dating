@@ -39,7 +39,7 @@ Set up a profile
             <label class="font-weight-bold">State</label>
             <br>
             <select class="w-100" name="state">
-                <option>--Select a state--</option>
+                <option>--Select a State--</option>
                 <repeat group="{{ @SESSION.states }}" value="@state">
                     <option value="@state">{{ @state }}</option>
                 </repeat>
@@ -53,9 +53,16 @@ Set up a profile
             <input type="radio" name="seeking">&nbsp;Female
         </div>
         <div class="col-6">
-            <textarea name="bio" class="rounded"></textarea>
+            <label class="font-weight-bold">Biography</label>
+            <textarea name="bio" class="rounded w-100 h-50"></textarea>
         </div>
     </div>
+        <div class="row">
+            <div class="col-10"></div> <!-- empty space -->
+            <div class="col-2">
+                <input type="submit" class="btn btn-primary rounded" value="Next >">
+            </div>
+        </div>
     </form>
 </div>
 

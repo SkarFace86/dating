@@ -36,7 +36,7 @@ $f3->route('GET|POST /personal-info', function($f3) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $phone = $_POST['phone'];
-    if(isset($_POST)) {
+    if(!empty($_POST)) {
         if(validFirstName($fname) && validLastName($lname) &&
             validAge($age) && validPhone($phone)) {
             $_SESSION['fname'] = $fname;
@@ -51,10 +51,24 @@ $f3->route('GET|POST /personal-info', function($f3) {
     echo $template->render('views/personal-info.html');
 });
 
-$f3->route('GET /profile', function($f3) {
+$f3->route('GET|POST /profile', function($f3) {
+    if(!empty($_POST)) {
+        print_r($_POST);
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['seeking'] = $_POST['seeking'];
+        $_SESSION['bio'] = $_POST['bio'];
+        $f3->reroute('interests');
+    }
     include('include/states.php');
     $template = new Template();
     echo $template->render('views/profile.html');
 });
+
+$f3->route('GET|POST /interests', function($f3) {
+    $template = new Template();
+    echo $template->render('views/interests.html');
+});
+
 //Run fat-free
 $f3->run();
