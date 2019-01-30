@@ -66,6 +66,7 @@ $f3->route('GET|POST /profile', function($f3) {
 });
 
 $f3->route('GET|POST /interests', function($f3) {
+    include('include/interests.php');
     $template = new Template();
     echo $template->render('views/interests.html');
 });
