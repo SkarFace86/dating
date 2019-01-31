@@ -43,16 +43,16 @@ Set up a profile
             <select class="w-100" name="state">
                 <option>--Select a State--</option>
                 <repeat group="{{ @SESSION.states }}" value="@state">
-                    <option value="@state">{{ @state }}</option>
+                    <option value="{{ @state }}">{{ @state }}</option>
                 </repeat>
             </select>
             <br><br>
 
             <label class="font-weight-bold">Seeking</label>
             <br>
-            <input type="radio" name="seeking" {{ @male }}>&nbsp;Male
+            <input type="radio" value='Male'name="seeking" {{ @male }}>&nbsp;Male
             &nbsp;&nbsp;
-            <input type="radio" name="seeking" {{ @female }} >&nbsp;Female
+            <input type="radio" value='Female' name="seeking" {{ @female }} >&nbsp;Female
         </div>
         <div class="col-6">
             <label class="font-weight-bold">Biography</label>

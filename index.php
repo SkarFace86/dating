@@ -68,7 +68,6 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['bio'] = $_POST['bio'];
         $f3->reroute('interests');
     }
-    include('include/states.php');
     if($_POST['seeking'] == 'male') {
         $f3->set('male', "checked='checked'");
         $f3->set('female', "");
@@ -77,20 +76,32 @@ $f3->route('GET|POST /profile', function($f3) {
         $f3->set('male', "");
         $f3->set('female', "checked='checked'");
     }
+    include('include/states.php');
     $template = new Template();
     echo $template->render('views/profile.html');
 });
 
-$f3->route('GET|POST /interests', function($f3) {
+$f3->route('GET|POST /interests', function() {
     include('include/interests.php');
-    if(!empty($_POST)) {
-        $f3->reroute('summary');
-    }
     $template = new Template();
     echo $template->render('views/interests.html');
 });
 
 $f3->route('GET|POST /summary', function($f3) {
+    if(!empty($_POST)) {
+        if(!empty($_POST['indoor']) && !empty($_POST['outdoor'])) {
+            $interests = array_merge($_POST['indoor'], $_POST['outdoor']);
+            $_SESSION['interests'] = implode(", ", $interests);
+        }
+        else if(!empty($_POST['indoor'])) {
+            $_SESSION['interests'] = implode(', ', $_POST['indoor']);
+        }
+        else if(!empty($_POST['outdoor'])) {
+            $_SESSION['interests'] = implode(', ', $_POST['outdoor']);
+        }
+
+        $f3->reroute('summary');
+    }
     $template = new Template();
     echo $template->render('views/summary.html');
 });

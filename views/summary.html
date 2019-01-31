@@ -18,14 +18,32 @@
 <div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
     <div class="row">
         <div class="col-6">
-            <label class="border rounded-top border-secondary py-2 px-4 mb-0 w-100">Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Gender: {{ @SESSION.gender }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Age: {{ @SESSION.age }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Phone: {{ @SESSION.phone }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Email: {{ @SESSION.email }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">State: {{ @SESSION.state }}</label>
-            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Seeking: {{ @SESSION.seeking }}</label>
-            <label class="border-left rounded-bottom border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Interests: </label>
+            <table class="w-100">
+                <tr class="border border-secondary">
+                    <td class="p-2">Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Gender: {{ @SESSION.gender }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Age: {{ @SESSION.age }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Phone: {{ @SESSION.phone }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Email: {{ @SESSION.email }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">State: {{ @SESSION.state }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Seeking: {{ @SESSION.seeking }}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Interests: {{ @SESSION.interests }}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
