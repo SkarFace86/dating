@@ -27,7 +27,7 @@
         <div class="row">
             <repeat group="{{ @SESSION.indoor }}" value="@interest">
                 <div class="col-3">
-                    <input type="checkbox" name="indoor">&nbsp;{{ @interest }}
+                    <input type="checkbox" name="indoor[]">&nbsp;{{ @interest }}
                 </div>
             </repeat>
         </div>
@@ -38,7 +38,7 @@
         <div class="row">
             <repeat group="{{ @SESSION.outdoor }}" value="@interest">
                 <div class="col-3">
-                    <input type="checkbox" name="outdoor">&nbsp;{{ @interest }}
+                    <input type="checkbox" name="outdoor[]">&nbsp;{{ @interest }}
                 </div>
             </repeat>
         </div>

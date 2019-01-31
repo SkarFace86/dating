@@ -33,7 +33,9 @@ Set up a profile
         <div class="col-6">
             <label class="font-weight-bold">Email</label>
             <br>
-            <input type="text" name="email" class="w-100">
+            <input type="text" name="email" class="w-100" value="{{ @POST.email }}">
+            <check if="!@validEmail &&
+                            !empty(@_POST)"><label class="alert-danger font-weight-bold w-100">Enter a valid email address</label></check>
             <br><br>
 
             <label class="font-weight-bold">State</label>
@@ -48,9 +50,9 @@ Set up a profile
 
             <label class="font-weight-bold">Seeking</label>
             <br>
-            <input type="radio" name="seeking">&nbsp;Male
+            <input type="radio" name="seeking" {{ @male }}>&nbsp;Male
             &nbsp;&nbsp;
-            <input type="radio" name="seeking">&nbsp;Female
+            <input type="radio" name="seeking" {{ @female }} >&nbsp;Female
         </div>
         <div class="col-6">
             <label class="font-weight-bold">Biography</label>

@@ -45,12 +45,12 @@ Set up personal information
                             !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</p></check>
             <label><span class="font-weight-bold">Gender</span>
                 <br>
-                <input type="radio" value="male" name="gender">&nbsp;
+                <input type="radio" value="male" name="gender" {{ @male }}>&nbsp;
                 <span class="font-weight-bold">Male</span>
                 &nbsp;&nbsp;
             </label>
             <label>
-                <input type="radio" value="female" name="gender">&nbsp;
+                <input type="radio" value="female" name="gender" {{ @female }}>
                 <span class="font-weight-bold">Female</span>
             </label> <!-- Gender -->
             <label class="font-weight-bold w-100">Phone</label>

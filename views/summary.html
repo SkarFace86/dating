@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Summary Page</title>
+</head>
+<body>
+<div class="container col-lg-9 col-md-12 px-0">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Your Forever Finder</a>
+    </nav> <!-- nav bar -->
+</div> <!-- nav bar container -->
+<div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
+    <div class="row">
+        <div class="col-6">
+            <label class="border rounded-top border-secondary py-2 px-4 mb-0 w-100">Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Gender: {{ @SESSION.gender }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Age: {{ @SESSION.age }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Phone: {{ @SESSION.phone }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Email: {{ @SESSION.email }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">State: {{ @SESSION.state }}</label>
+            <label class="border-left border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Seeking: {{ @SESSION.seeking }}</label>
+            <label class="border-left rounded-bottom border-right border-bottom border-secondary py-2 px-4 mb-0 w-100">Interests: </label>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/jquery.slim.min.js"></script>
+<script src="scripts/popper.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
+</body>
+</html>
