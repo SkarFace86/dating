@@ -31,20 +31,13 @@ $f3->route('GET /', function() {
 
 //Personal information route
 $f3->route('GET|POST /personal-info', function($f3) {
+    $f3->set('title', 'Personal Info');
     $_SESSION = array();
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $phone = $_POST['phone'];
-    if($_POST['gender'] == 'male') {
-        $f3->set('male', "checked='checked'");
-        $f3->set('female', "");
-    }
-    else if($_POST['gender'] == 'female') {
-        $f3->set('male', "");
-        $f3->set('female', "checked='checked'");
-    }
     if(!empty($_POST)) {
         if(validFirstName($fname) && validLastName($lname) &&
             validAge($age) && validPhone($phone)) {
@@ -88,7 +81,7 @@ $f3->route('GET|POST /interests', function() {
 });
 
 $f3->route('GET|POST /summary', function($f3) {
-    if(!empty($_POST)) {
+    if(isset($_POST['submit'])) {
         if(!empty($_POST['indoor']) && !empty($_POST['outdoor'])) {
             $interests = array_merge($_POST['indoor'], $_POST['outdoor']);
             $_SESSION['interests'] = implode(", ", $interests);
