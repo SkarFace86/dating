@@ -5,7 +5,17 @@ IT 328
 personal-info.html
 Set up personal information
 -->
-<include href="include/head.html"></include>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Personal Information</title>
+</head>
 <body>
 <include href="include/navbar.html"></include>
 <div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
@@ -18,16 +28,16 @@ Set up personal information
         <div class="col-7">
             <label class="font-weight-bold w-100">First Name</label> <!-- First Name -->
                 <input type="text" name="fname" class="w-100" value="{{ @_POST.fname }}">
-            <check if="!@validFname &&
-                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid first name</p></check>
+            <check if="!validFirstName(@POST.fname) &&
+                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid first name</p></check>
             <label class="font-weight-bold w-100">Last Name</label> <!-- Last Name -->
                 <input type="text" name="lname" class="w-100" value="{{ @_POST.lname }}">
-            <check if="!@validLname &&
-                            !empty(@_POST)"><p class=" alert-danger font-weight-bold">Enter a valid last name</p></check>
+            <check if="!validFirstName(@POST.lname) &&
+                            !empty(@POST)"><p class=" alert-danger font-weight-bold">Enter a valid last name</p></check>
             <label class="font-weight-bold w-100">Age</label> <!-- Age -->
                 <input type="text" name="age" class="w-100" value="{{ @_POST.age }}">
-            <check if="!@validAge &&
-                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</p></check>
+            <check if="!validAge(@POST.age) &&
+                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</p></check>
             <label><span class="font-weight-bold">Gender</span>
                 <br>
                 <input type="radio" value="Male" name="gender" <check if="@POST.gender == 'Male'">checked='checked'</check>>&nbsp;
@@ -41,8 +51,8 @@ Set up personal information
             <label class="font-weight-bold w-100">Phone</label>
                 <input type="text" name="phone" class="w-100" value="{{ @_POST.phone }}"
                        placeholder="(XXX)XXX-XXXX">
-            <check if="!@validPhone &&
-                            !empty(@_POST)"><p class="alert-danger font-weight-bold">Enter a valid phone number</p></check>
+            <check if="!validPhone(@POST.phone) &&
+                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid phone number</p></check>
         </div> <!-- col-7 -->
         <div class="col-5">
             <p class="border border-dark tos rounded text-center"><span class="font-weight-bold">Note:</span> All information
@@ -61,6 +71,8 @@ Set up personal information
     </form>
 </div> <!-- div class container -->
 
-<include href="include/scripts.html"></include>
+<script src="scripts/jquery.slim.min.js"></script>
+<script src="scripts/popper.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
 </body>
 </html>

@@ -31,8 +31,20 @@ function validEmail($email) {
         strpos(strtolower($email), '.com') !== false;
 }
 
-$f3->set('validFname', (validFirstName($fname)));
-$f3->set('validLname', validLastName($lname));
-$f3->set('validAge', (validAge($age)));
-$f3->set('validPhone', (validPhone($phone)));
-$f3->set('validEmail', (validEmail($email)));
+function validIndoor($interests) {
+    foreach($interests as $interest) {
+        if(!in_array($interest, $_SESSION['indoor'])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function validOutdoor($interests) {
+    foreach($interests as $interest) {
+        if(!in_array($interest, $_SESSION['outdoor'])) {
+            return false;
+        }
+    }
+    return true;
+}

@@ -24,7 +24,8 @@ $f3->set('DEBUG', 3);
 require_once('model/data-validation.php');
 
 //Define a default route
-$f3->route('GET /', function() {
+$f3->route('GET /', function($f3) {
+    $f3->set('title', 'Your Forever Finder');
     $view = new View();
     echo $view->render('views/home.html');
 });
@@ -54,6 +55,7 @@ $f3->route('GET|POST /personal-info', function($f3) {
 });
 
 $f3->route('GET|POST /profile', function($f3) {
+    $f3->set('title', 'Profile');
     if(!empty($_POST) && validEmail($_POST['email'])) {
         $_SESSION['email'] = strtolower($_POST['email']);
         $_SESSION['state'] = $_POST['state'];
@@ -61,40 +63,44 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['bio'] = $_POST['bio'];
         $f3->reroute('interests');
     }
-    if($_POST['seeking'] == 'male') {
-        $f3->set('male', "checked='checked'");
-        $f3->set('female', "");
-    }
-    else if($_POST['seeking'] == 'female') {
-        $f3->set('male', "");
-        $f3->set('female', "checked='checked'");
-    }
     include('include/states.php');
     $template = new Template();
     echo $template->render('views/profile.html');
 });
 
-$f3->route('GET|POST /interests', function() {
+$f3->route('GET|POST /interests', function($f3) {
+    $f3->set('title', 'Interests');
     include('include/interests.php');
-    $template = new Template();
-    echo $template->render('views/interests.html');
-});
-
-$f3->route('GET|POST /summary', function($f3) {
+    $_SESSION['interests'] = "";
     if(isset($_POST['submit'])) {
         if(!empty($_POST['indoor']) && !empty($_POST['outdoor'])) {
+            if(!validIndoor($_POST['indoor']) && !validOutdoor($_POST['outdoor'])) {
+                $f3->reroute('interests');
+            }
             $interests = array_merge($_POST['indoor'], $_POST['outdoor']);
             $_SESSION['interests'] = implode(", ", $interests);
         }
         else if(!empty($_POST['indoor'])) {
+            if(!validIndoor($_POST['indoor'])) {
+                $f3->reroute('interests');
+            }
             $_SESSION['interests'] = implode(', ', $_POST['indoor']);
         }
         else if(!empty($_POST['outdoor'])) {
+            if(!validOutdoor($_POST['outdoor'])) {
+                $f3->reroute('interests');
+            }
             $_SESSION['interests'] = implode(', ', $_POST['outdoor']);
         }
 
         $f3->reroute('summary');
     }
+    $template = new Template();
+    echo $template->render('views/interests.html');
+});
+
+$f3->route('GET|POST /summary', function($f3) {
+    $f3->set('title', 'Summary');
     $template = new Template();
     echo $template->render('views/summary.html');
 });

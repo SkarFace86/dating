@@ -5,10 +5,23 @@ IT 328
 profile.html
 Set up a profile
 -->
-
-<include href="include/head.html"></include>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Profile</title>
+</head>
 <body>
-<include href="include/navbar.html"></include>
+<div class="container col-lg-9 col-md-12 px-0">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Your Forever Finder</a>
+    </nav> <!-- nav bar -->
+</div> <!-- nav bar container -->
 <div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
     <div class="row col-12">
         <h1>Profile</h1>
@@ -20,8 +33,8 @@ Set up a profile
             <label class="font-weight-bold">Email</label>
             <br>
             <input type="text" name="email" class="w-100" value="{{ @POST.email }}">
-            <check if="!@validEmail &&
-                            !empty(@_POST)"><label class="alert-danger font-weight-bold w-100">Enter a valid email address</label></check>
+            <check if="!validEmail(@POST.email) &&
+                            !empty(@POST)"><label class="alert-danger font-weight-bold w-100">Enter a valid email address</label></check>
             <br><br>
 
             <label class="font-weight-bold">State</label>
@@ -29,20 +42,21 @@ Set up a profile
             <select class="w-100" name="state">
                 <option>--Select a State--</option>
                 <repeat group="{{ @SESSION.states }}" value="@state">
-                    <option value="{{ @state }}">{{ @state }}</option>
+                    <option value="{{ @state }}"
+                    <check if="@POST.state == @state">selected='selected'</check>>{{ @state }}</option>
                 </repeat>
             </select>
             <br><br>
 
             <label class="font-weight-bold">Seeking</label>
             <br>
-            <input type="radio" value='Male'name="seeking" {{ @male }}>&nbsp;Male
+            <input type="radio" value='Male' name="seeking" <check if="@POST.seeking == 'Male'">checked='checked'</check>>&nbsp;Male
             &nbsp;&nbsp;
-            <input type="radio" value='Female' name="seeking" {{ @female }} >&nbsp;Female
+            <input type="radio" value='Female' name="seeking" <check if="@POST.seeking == 'Female'">checked='checked'</check>>&nbsp;Female
         </div>
         <div class="col-6">
             <label class="font-weight-bold">Biography</label>
-            <textarea name="bio" class="rounded w-100 h-50"></textarea>
+            <textarea name="bio" class="rounded w-100 h-50">{{ @POST.bio }}</textarea>
         </div>
     </div>
         <div class="row">
@@ -54,6 +68,8 @@ Set up a profile
     </form>
 </div>
 
-<include href="include/scripts.html"></include>
+<script src="scripts/jquery.slim.min.js"></script>
+<script src="scripts/popper.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
 </body>
 </html>
