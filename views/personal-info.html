@@ -27,17 +27,18 @@ Set up personal information
     <div class="row">
         <div class="col-7">
             <label class="font-weight-bold w-100">First Name</label> <!-- First Name -->
-                <input type="text" name="fname" class="w-100" value="{{ @_POST.fname }}">
+                <input type="text" name="fname" class="w-100" value="{{ @POST.fname }}">
             <check if="!validFirstName(@POST.fname) &&
-                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid first name</p></check>
+                            !empty(@POST)"><div class="alert-danger font-weight-bold">Enter a valid first name</div><br></check>
             <label class="font-weight-bold w-100">Last Name</label> <!-- Last Name -->
-                <input type="text" name="lname" class="w-100" value="{{ @_POST.lname }}">
+                <input type="text" name="lname" class="w-100" value="{{ @POST.lname }}">
             <check if="!validFirstName(@POST.lname) &&
-                            !empty(@POST)"><p class=" alert-danger font-weight-bold">Enter a valid last name</p></check>
+                            !empty(@POST)"><div class="alert-danger font-weight-bold">Enter a valid last name</div><br></check>
+
             <label class="font-weight-bold w-100">Age</label> <!-- Age -->
-                <input type="text" name="age" class="w-100" value="{{ @_POST.age }}">
+                <input type="text" name="age" class="w-100" value="{{ @POST.age }}">
             <check if="!validAge(@POST.age) &&
-                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</p></check>
+                            !empty(@POST)"><div class="alert-danger font-weight-bold">Enter a valid age. Must be over 18</div><br></check>
             <label><span class="font-weight-bold">Gender</span>
                 <br>
                 <input type="radio" value="Male" name="gender" <check if="@POST.gender == 'Male'">checked='checked'</check>>&nbsp;
@@ -49,10 +50,13 @@ Set up personal information
                 <span class="font-weight-bold">Female</span>
             </label> <!-- Gender -->
             <label class="font-weight-bold w-100">Phone</label>
-                <input type="text" name="phone" class="w-100" value="{{ @_POST.phone }}"
+                <input type="text" name="phone" class="w-100" value="{{ @POST.phone }}"
                        placeholder="(XXX)XXX-XXXX">
             <check if="!validPhone(@POST.phone) &&
-                            !empty(@POST)"><p class="alert-danger font-weight-bold">Enter a valid phone number</p></check>
+                            !empty(@POST)"><div class="alert-danger font-weight-bold">Enter a valid phone number</div><br></check>
+            <label class="font-weight-bold w-100">Premium Membership</label>
+                <input type="checkbox" value="premium" name="premium" <check if="@POST.premium == 'premium'">checked='checked'</check>>&nbsp;
+                <span>Sign me up for a Premium Account!</span>
         </div> <!-- col-7 -->
         <div class="col-5">
             <p class="border border-dark tos rounded text-center"><span class="font-weight-bold">Note:</span> All information

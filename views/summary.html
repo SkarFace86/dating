@@ -48,9 +48,11 @@ Summary of the information
                 <tr class="border border-secondary">
                     <td class="p-2">Seeking: {{ @SESSION.seeking }}</td>
                 </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Interests: {{ @SESSION.interests }}</td>
-                </tr>
+                <check if="@SESSION.premium == 'premium'">
+                    <tr class="border border-secondary">
+                        <td class="p-2">Interests: {{ @SESSION.interests }}</td>
+                    </tr>
+                </check>
             </table>
         </div>
         <div class="col-6">

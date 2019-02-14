@@ -39,6 +39,7 @@ $f3->route('GET|POST /personal-info', function($f3) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $phone = $_POST['phone'];
+    $premium = $_POST['premium'];
     if(!empty($_POST)) {
         if(validFirstName($fname) && validLastName($lname) &&
             validAge($age) && validPhone($phone)) {
@@ -47,6 +48,7 @@ $f3->route('GET|POST /personal-info', function($f3) {
             $_SESSION['age'] = $age;
             $_SESSION['gender'] = $gender;
             $_SESSION['phone'] = $phone;
+            $_SESSION['premium'] = $premium;
             $f3->reroute('profile');
         }
     }
@@ -61,7 +63,11 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['state'] = $_POST['state'];
         $_SESSION['seeking'] = $_POST['seeking'];
         $_SESSION['bio'] = $_POST['bio'];
-        $f3->reroute('interests');
+        if($_SESSION['premium'] == 'premium') {
+            $f3->reroute('interests');
+        } else {
+            $f3->reroute('summary');
+        }
     }
     include('include/states.php');
     $template = new Template();
