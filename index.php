@@ -43,12 +43,14 @@ $f3->route('GET|POST /personal-info', function($f3) {
     if(!empty($_POST)) {
         if(validFirstName($fname) && validLastName($lname) &&
             validAge($age) && validPhone($phone)) {
-            $_SESSION['fname'] = $fname;
-            $_SESSION['lname'] = $lname;
-            $_SESSION['age'] = $age;
-            $_SESSION['gender'] = $gender;
-            $_SESSION['phone'] = $phone;
-            $_SESSION['premium'] = $premium;
+            if($premium == 'premium') {
+                $member = new PremiumMember($fname, $lname,
+                        $age, $gender, $phone);
+            } else {
+                $member = new Member($fname, $lname,
+                    $age, $gender, $phone);
+            }
+            $_SESSION['member'] = $member;
             $f3->reroute('profile');
         }
     }
