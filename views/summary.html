@@ -28,29 +28,30 @@ Summary of the information
         <div class="col-6">
             <table class="w-100">
                 <tr class="border border-secondary">
-                    <td class="p-2">Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</td>
+                    <td class="p-2">Name: {{ @SESSION.member->getFname() }} {{ @SESSION.member->getLname() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">Gender: {{ @SESSION.gender }}</td>
+                    <td class="p-2">Gender: {{ @SESSION.member->getGender() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">Age: {{ @SESSION.age }}</td>
+                    <td class="p-2">Age: {{ @SESSION.member->getAge() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">Phone: {{ @SESSION.phone }}</td>
+                    <td class="p-2">Phone: {{ @SESSION.member->getPhone() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">Email: {{ @SESSION.email }}</td>
+                    <td class="p-2">Email: {{ @SESSION.member->getEmail() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">State: {{ @SESSION.state }}</td>
+                    <td class="p-2">State: {{ @SESSION.member->getState() }}</td>
                 </tr>
                 <tr class="border border-secondary">
-                    <td class="p-2">Seeking: {{ @SESSION.seeking }}</td>
+                    <td class="p-2">Seeking: {{ @SESSION.member->getSeeking() }}</td>
                 </tr>
-                <check if="@SESSION.premium == 'premium'">
+                <check if="get_class(@SESSION.member) == 'PremiumMember'">
                     <tr class="border border-secondary">
-                        <td class="p-2">Interests: {{ @SESSION.interests }}</td>
+                        <td class="p-2">Interests: {{ implode(' ', @SESSION.member->getIndoorInterests()) }}
+                                    {{ implode(' ', @SESSION.member->getOutdoorInterests()) }}</td>
                     </tr>
                 </check>
             </table>
@@ -58,6 +59,8 @@ Summary of the information
         <div class="col-6">
             <div class="text-center">
                 <img src="images/profile.png" alt="Profile Picture" class="rounded w-50">
+                <br>
+                <input type="submit" name="picture" action="#" value="Upload Photo" class="btn mx-auto">
             </div>
             <br>
             <h3>Biography: </h3>

@@ -60,12 +60,17 @@ $f3->route('GET|POST /personal-info', function($f3) {
 
 $f3->route('GET|POST /profile', function($f3) {
     $f3->set('title', 'Profile');
+    $member = $_SESSION['member'];
     if(!empty($_POST) && validEmail($_POST['email'])) {
-        $_SESSION['email'] = strtolower($_POST['email']);
-        $_SESSION['state'] = $_POST['state'];
-        $_SESSION['seeking'] = $_POST['seeking'];
-        $_SESSION['bio'] = $_POST['bio'];
-        if($_SESSION['premium'] == 'premium') {
+        $email = strtolower($_POST['email']);
+        $state = $_POST['state'];
+        $seeking = $_POST['seeking'];
+        $bio = $_POST['bio'];
+        $member->setEmail($email);
+        $member->setState($state);
+        $member->setSeeking($seeking);
+        $member->setBio($bio);
+        if(get_class($member) == 'PremiumMember') {
             $f3->reroute('interests');
         } else {
             $f3->reroute('summary');
@@ -78,27 +83,32 @@ $f3->route('GET|POST /profile', function($f3) {
 
 $f3->route('GET|POST /interests', function($f3) {
     $f3->set('title', 'Interests');
+    $member = $_SESSION['member'];
+    $member->setIndoorInterests(array());
+    $member->setOutdoorInterests(array());
     include('include/interests.php');
-    $_SESSION['interests'] = "";
     if(isset($_POST['submit'])) {
         if(!empty($_POST['indoor']) && !empty($_POST['outdoor'])) {
             if(!validIndoor($_POST['indoor']) && !validOutdoor($_POST['outdoor'])) {
                 $f3->reroute('interests');
             }
-            $interests = array_merge($_POST['indoor'], $_POST['outdoor']);
-            $_SESSION['interests'] = implode(", ", $interests);
+
+            $member->setIndoorInterests($_POST['indoor']);
+            $member->setOutdoorInterests($_POST['outdoor']);
         }
         else if(!empty($_POST['indoor'])) {
             if(!validIndoor($_POST['indoor'])) {
                 $f3->reroute('interests');
             }
-            $_SESSION['interests'] = implode(', ', $_POST['indoor']);
+
+            $member->setIndoorInterests($_POST['indoor']);
         }
         else if(!empty($_POST['outdoor'])) {
             if(!validOutdoor($_POST['outdoor'])) {
                 $f3->reroute('interests');
             }
-            $_SESSION['interests'] = implode(', ', $_POST['outdoor']);
+
+            $member->setOutdoorInterests($_POST['outdoor']);
         }
 
         $f3->reroute('summary');
