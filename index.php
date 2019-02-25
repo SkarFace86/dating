@@ -26,8 +26,8 @@ require_once('model/data-validation.php');
 //Define a default route
 $f3->route('GET /', function($f3) {
     $f3->set('title', 'Your Forever Finder');
-    $view = new View();
-    echo $view->render('views/home.html');
+    $template = new Template();
+    echo $template->render('views/home.html');
 });
 
 //Personal information route
@@ -118,6 +118,11 @@ $f3->route('GET|POST /interests', function($f3) {
 });
 
 $f3->route('GET|POST /summary', function($f3) {
+    //connect to the database
+    $db = new Database();
+    $db->connect();
+    $db->insertMember();
+
     $f3->set('title', 'Summary');
     $template = new Template();
     echo $template->render('views/summary.html');
