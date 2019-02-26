@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>{{ @title }}</title>
+</head>
+<body>
+<include href="include/navbar.html" />
+
+<div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
+    <h1>Members Page</h1>
+    <table class="table">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">State</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Seeking</th>
+            <th scope="col">Premium</th>
+            <th scope="col">Interests</th>
+        </thead>
+        <tbody>
+        <repeat group="{{ @results }}" value="{{ @member }}">
+            <tr><a href="{{ @BASE }}/view/{{ @member['fname'] }}"></a></tr>
+                <td scope="row">{{ @member['member_id'] }}</td>
+                <td>{{ @member['fname'] }} {{ @member['lname'] }}</td>
+                <td>{{ @member['age'] }}</td>
+                <td>{{ @member['phone'] }}</td>
+                <td>{{ @member['email'] }}</td>
+                <td>{{ @member['state'] }}</td>
+                <td>{{ @member['gender'] }}</td>
+                <td>{{ @member['seeking'] }}</td>
+                <td><input type="checkbox"
+                        <check if="@member['premium'] == 1">checked=checked</check>></td>
+                <td>{{ @member['interests'] }}</td>
+        </repeat>
+        </tbody>
+    </table>
+</div>
+<script src="//code.jquery.com/jquery.js"></script>
+</body>
+</html>

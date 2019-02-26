@@ -118,14 +118,27 @@ $f3->route('GET|POST /interests', function($f3) {
 });
 
 $f3->route('GET|POST /summary', function($f3) {
+    $f3->set('title', 'Summary');
+
     //connect to the database
     $db = new Database();
     $db->connect();
     $db->insertMember();
 
-    $f3->set('title', 'Summary');
     $template = new Template();
     echo $template->render('views/summary.html');
+});
+
+$f3->route('GET|POST /admin', function($f3) {
+    $f3->set('title', 'Admin');
+
+    $db = new Database();
+    $db->connect();
+    $results = $db->getMembers();
+    $f3->set('results', $results);
+
+    $template = new Template();
+    echo $template->render('views/admin.html');
 });
 
 //Run fat-free

@@ -98,7 +98,20 @@ class Database {
 
     public function getMembers()
     {
+        global $dbh;
 
+        $sql = "SELECT * FROM datingMembers";
+
+        $statement = $dbh->prepare($sql);
+
+        $statement->execute();
+        $arr = $statement->errorInfo();
+        if(isset($arr[2])) {
+            print_r($arr[2]);
+        }
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function getMember($id)
