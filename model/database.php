@@ -25,7 +25,11 @@
 // image VARCHAR(100),
 // interests VARCHAR(1000));
 
-class Database {
+class Database
+{
+    /**
+     * Connects to the database
+     */
     public function connect()
     {
         require_once('/home/bskargre/config.php');
@@ -38,12 +42,16 @@ class Database {
         }
     }
 
+    /**
+     * Inserts member information into the database
+     */
     public function insertMember()
     {
         global $dbh;
 
         $member = $_SESSION['member'];
 
+        //get all the information stored in the member object
         $fname = $member->getFname();
         $lname= $member->getLname();
         $age = $member->getAge();
@@ -57,14 +65,18 @@ class Database {
         $premium = get_class($member) == 'PremiumMember' ? 1 : 0;
         $interests = null;
 
+        //create a comma separated string of the interests
         if((boolean)$premium) {
+            //if both indoor and outdoor interests were selected
             if(!empty($member->getInDoorInterests()) && !empty($member->getOutDoorInterests())) {
 
                 $interests = implode(', ', $member->getInDoorInterests()) . ', ' . implode(', ', $member->getOutDoorInterests());
             }
+            //if indoor interests were selected and outdoor interests was not selected
             else if(!empty($member->getInDoorInterests())) {
                 $interests = implode(', ', $member->getInDoorInterests());
             }
+            //if outdoor interests were selected and indoor interests was not selected
             else if(!empty($member->getOutDoorInterests())) {
                 $interests = implode(', ', $member->getOutDoorInterests());
             }
@@ -75,6 +87,8 @@ class Database {
             VALUES(:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :image, :interests)";
 
         $statement = $dbh->prepare($sql);
+
+        //bind all the parameters
         $statement->bindValue(':fname', $fname, PDO::PARAM_STR);
         $statement->bindValue(':lname', $lname, PDO::PARAM_STR);
         $statement->bindValue(':age', $age, PDO::PARAM_STR);
@@ -88,14 +102,18 @@ class Database {
         $statement->bindValue(':image', $image, PDO::PARAM_STR);
         $statement->bindValue(':interests', $interests, PDO::PARAM_STR);
 
+        //execute and check for errors
         $statement->execute();
         $arr = $statement->errorInfo();
         if(isset($arr[2])) {
             print_r($arr[2]);
         }
-
     }
 
+    /**
+     * Gets all the information from the database to display in a table for the user
+     * @return array Returns an array of all the rows and columns in the database
+     */
     public function getMembers()
     {
         global $dbh;
@@ -104,6 +122,7 @@ class Database {
 
         $statement = $dbh->prepare($sql);
 
+        //execute and check for errors
         $statement->execute();
         $arr = $statement->errorInfo();
         if(isset($arr[2])) {
@@ -114,6 +133,11 @@ class Database {
         return $results;
     }
 
+    /**
+     * Gets a single users data from the database to display their information to the user
+     * @param $id the ID to use as primary key for searching for a specific user
+     * @return mixed Returns an array of a single member and all of their information with the given ID
+     */
     public function getMember($id)
     {
         global $dbh;
@@ -125,6 +149,7 @@ class Database {
 
         $statement->bindValue(':id', $id, PDO::PARAM_STR);
 
+        //execute and check for errors
         $statement->execute();
         $arr = $statement->errorInfo();
         if(isset($arr[2])) {
