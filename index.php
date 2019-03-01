@@ -141,5 +141,13 @@ $f3->route('GET|POST /admin', function($f3) {
     echo $template->render('views/admin.html');
 });
 
+$f3->route('GET|POST /profile/@name', function($f3, $params) {
+    $f3->set('title', 'Name');
+    $memberId = $params['name'];
+
+    $template = new Template();
+    echo $template->render('views/profile.html');
+});
+
 //Run fat-free
 $f3->run();

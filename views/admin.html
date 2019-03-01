@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         <repeat group="{{ @results }}" value="{{ @member }}">
-            <tr><a href="{{ @BASE }}/view/{{ @member['fname'] }}"></a></tr>
+            <tr class="clickable-row" data-href="{{ @BASE }}/profile/{{ @member['member_id'] }}"></tr>
                 <td scope="row">{{ @member['member_id'] }}</td>
                 <td>{{ @member['fname'] }} {{ @member['lname'] }}</td>
                 <td>{{ @member['age'] }}</td>
@@ -43,5 +43,6 @@
     </table>
 </div>
 <script src="//code.jquery.com/jquery.js"></script>
+<script src="scripts/admin.js"></script>
 </body>
 </html>
