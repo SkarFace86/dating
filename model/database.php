@@ -118,7 +118,8 @@ class Database
     {
         global $dbh;
 
-        $sql = "SELECT * FROM datingMembers";
+        $sql = "SELECT * FROM datingMembers
+                ORDER BY lname ASC";
 
         $statement = $dbh->prepare($sql);
 
