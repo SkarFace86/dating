@@ -110,12 +110,28 @@ class Database {
             print_r($arr[2]);
         }
 
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
     }
 
     public function getMember($id)
     {
+        global $dbh;
 
+        $sql = "SELECT * FROM datingMembers
+                WHERE member_id = :id";
+
+        $statement = $dbh->prepare($sql);
+
+        $statement->bindValue(':id', $id, PDO::PARAM_STR);
+
+        $statement->execute();
+        $arr = $statement->errorInfo();
+        if(isset($arr[2])) {
+            print_r($arr[2]);
+        }
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

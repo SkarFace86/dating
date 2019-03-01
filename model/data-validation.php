@@ -29,6 +29,7 @@ function validPhone($phone) {
     $phone = str_replace('(', '', $phone);
     $phone = str_replace(')', '', $phone);
     $phone = str_replace('-', '', $phone);
+
     //Must be a a numeric string of 10 digits
     return (preg_match("/^[0-9]{10}$/", $phone));
 }
@@ -37,6 +38,22 @@ function validPhone($phone) {
 function validEmail($email) {
     return strpos($email, '@') !== false &&
         strpos(strtolower($email), '.com') !== false;
+}
+
+//change phone format to match (555)555-5555 format
+function changePhoneFormat($phone)
+{
+    //(before) 5555555555 (after) 555555-5555
+    $phone = substr_replace($phone, '-', 6, 0);
+
+    //(before) 555555-5555 (after) 555)555-5555
+    $phone = substr_replace($phone, ')', 3, 0);
+
+    //(before) 555)555-5555 (after) (555)555-5555
+    $phone = substr_replace($phone, '(', 0, 0);
+
+    //(555)555-5555
+    return $phone;
 }
 
 //validate the indoor activities entered by the user

@@ -43,6 +43,8 @@ $f3->route('GET|POST /personal-info', function($f3) {
     if(!empty($_POST)) {
         if(validFirstName($fname) && validLastName($lname) &&
             validAge($age) && validPhone($phone)) {
+            //set up phone to display as (555)555-5555 format
+            $phone = changePhoneFormat($phone);
             if($premium == 'premium') {
                 $member = new PremiumMember($fname, $lname,
                         $age, $gender, $phone);
@@ -141,12 +143,17 @@ $f3->route('GET|POST /admin', function($f3) {
     echo $template->render('views/admin.html');
 });
 
-$f3->route('GET|POST /profile/@name', function($f3, $params) {
-    $f3->set('title', 'Name');
-    $memberId = $params['name'];
+$f3->route('GET|POST /member-profile/@id', function($f3, $params) {
+    $f3->set('title', 'Member Profile');
+    $memberId = $params['id'];
+
+    $db = new Database();
+    $db->connect();
+    $result = $db->getMember($memberId);
+    $f3->set('result', $result);
 
     $template = new Template();
-    echo $template->render('views/profile.html');
+    echo $template->render('views/member-profile.html');
 });
 
 //Run fat-free

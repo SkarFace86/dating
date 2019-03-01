@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         <repeat group="{{ @results }}" value="{{ @member }}">
-            <tr class="clickable-row" data-href="{{ @BASE }}/profile/{{ @member['member_id'] }}"></tr>
+            <tr class='clickable-row' data-href="member-profile/{{ @member['member_id'] }}">
                 <td scope="row">{{ @member['member_id'] }}</td>
                 <td>{{ @member['fname'] }} {{ @member['lname'] }}</td>
                 <td>{{ @member['age'] }}</td>
@@ -38,10 +38,12 @@
                 <td><input type="checkbox"
                         <check if="@member['premium'] == 1">checked=checked</check>></td>
                 <td>{{ @member['interests'] }}</td>
+            </tr>
         </repeat>
         </tbody>
     </table>
 </div>
+
 <script src="//code.jquery.com/jquery.js"></script>
 <script src="scripts/admin.js"></script>
 </body>
